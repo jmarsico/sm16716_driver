@@ -28,6 +28,8 @@ public:
 
 	ofxUDPManager udpConnection;
 
+	int numNodes;
+
 
 	int blankCounter;
     

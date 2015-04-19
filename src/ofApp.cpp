@@ -12,6 +12,9 @@ void ofApp::setup(){
 	if(sm16716.init()) ofLog() << "TRUE IN MAIN SETUP";
     
     blankCounter = 0;
+
+    //how many lights on this rPi?
+    numNodes = 400;
 	
 
 }
@@ -19,17 +22,7 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
 	
-	// i++;
-	// int val = i%255;
 
-	// sm16716.set_pixel_rgb(0,0, val, 0, 0);
-	// sm16716.set_pixel_rgb(0, 1, 0, val, 0);
-	// sm16716.set_pixel_rgb(0, 2, 0, 0, 255 - val);
-	
-
-	// sm16716.show();
-
-	// ofSleepMillis(10);
 
 
 	char udpMessage[200000];
@@ -95,7 +88,7 @@ void ofApp::update(){
 	}
 
 
-	
+	ofLogVerbose() << ofGetFrameRate();
 	
 }
 		
