@@ -9,12 +9,14 @@ void ofApp::setup(){
 	udpConnection.Bind(11999);
 	udpConnection.SetNonBlocking(true);
 
-	if(sm16716.init()) ofLog() << "TRUE IN MAIN SETUP";
+	int numPix = 400;
+
+	if(sm16716.init(numPix)) ofLog() << "TRUE IN MAIN SETUP";
     
     blankCounter = 0;
 
     //how many lights on this rPi?
-    numNodes = 400;
+    numNodes = 3;
 	
 
 }
@@ -63,7 +65,7 @@ void ofApp::update(){
 					
 					// val = curvedMap(val);
 					//set the pixel values 
-					sm16716.set_pixel_rgb(0, chan, r, g, b );
+					sm16716.set_pixel_rgb(chan, r, g, b );
 				}
 			}
  			// ofLogVerbose() << "FrameRate: " << ofGetFrameRate();
