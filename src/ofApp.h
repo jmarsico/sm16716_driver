@@ -14,6 +14,8 @@
 
 #include "ofxNetwork.h"
 #include "ofxSM16716.h"
+#include "ofxXmlSettings.h"
+
 
 class ofApp : public ofBaseApp{
 public:
@@ -28,16 +30,10 @@ public:
 
 	ofxUDPManager udpConnection;
 
-	int numNodes;
-
+	int ID;
 
 	int blankCounter;
-    
-    
-    
 
-
-
-		
+	ofxXmlSettings config;	
 
 };

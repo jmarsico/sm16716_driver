@@ -9,14 +9,24 @@ void ofApp::setup(){
 	udpConnection.Bind(11999);
 	udpConnection.SetNonBlocking(true);
 
-	int numPix = 400;
+	//load config file
+	    //load config.xml
+    if(!config.loadFile(ofToDataPath("config.xml")))
+    {
+        ofLog() << "Failed to load config.xml";
+    }
 
-	if(sm16716.init(numPix)) ofLog() << "TRUE IN MAIN SETUP";
+	int numPix = config.getValue("NUMLIGHTS", 20);
+	ofLog() << "number of pixels to run: " << numPix;
+
+	if(sm16716.init(numPix))
+	{
+		ofLog() << "main: init of sm16716 successful";
+	} 
     
     blankCounter = 0;
 
-    //how many lights on this rPi?
-    numNodes = 3;
+
 	
 
 }
@@ -58,11 +68,13 @@ void ofApp::update(){
 				if( pixelValues.size() == 4 )
 				{
 					
-					chan=atoi(pixelValues[0].c_str());	//first value is the channel, or pixel address
-					r = atoi(pixelValues[1].c_str());	//second value is red
-					g = atoi(pixelValues[2].c_str());	//third value is green
-					b = atoi(pixelValues[3].c_str());	//fourth value is blue
+					chan = atol(pixelValues[0].c_str());	//first value is the channel, or pixel address
+					r = atol(pixelValues[1].c_str());	//second value is red
+					g = atol(pixelValues[2].c_str());	//third value is green
+					b = atol(pixelValues[3].c_str());	//fourth value is blue
 					
+					if(chan == 1) ofLog() << "GOT ONE!";
+
 					// val = curvedMap(val);
 					//set the pixel values 
 					sm16716.set_pixel_rgb(chan, r, g, b );
