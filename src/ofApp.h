@@ -1,8 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
-#include "wiringPi.h"
-#include "wiringPiSPI.h"
+#include <wiringPi.h>
+#include <wiringPiSPI.h>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,7 +22,7 @@ public:
 	void setup();
 	void update();
 	void draw();
-	
+
 	void keyPressed(int key);
 	void keyReleased(int key);
 
@@ -34,6 +34,6 @@ public:
 
 	int blankCounter;
 
-	ofxXmlSettings config;	
+	ofxXmlSettings config;
 
 };

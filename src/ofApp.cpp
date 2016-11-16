@@ -22,37 +22,37 @@ void ofApp::setup(){
 	if(sm16716.init(numPix))
 	{
 		ofLog() << "main: init of sm16716 successful";
-	} 
-    
+	}
+
     blankCounter = 0;
 
 
-	
+
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	
+
 
 
 
 	char udpMessage[200000];
-	
+
 	//get the UDP mesage
 	int result = udpConnection.Receive(udpMessage,200000);
-	
+
 	//if there is a message
 	if(result > 0)
 	{
 		blankCounter = 0;
 		//get the message
 		string message=udpMessage;
-		
+		// ofLog() << message;
 		//if the message is not blank, start parsing
 		if(message!="")
 		{
-			
+
 			//set up variables for the channel, red, green, blue values
 			uint32_t chan, r,g,b;
 
@@ -62,21 +62,21 @@ void ofApp::update(){
 			//go through each pixelPacket and parse it
 			for(unsigned int i=0;i<pixelPackets.size();i++)
 			{
-				
+
 				//we should have four pixel values for each packet: chan, r, g, b
 				vector<string> pixelValues = ofSplitString(pixelPackets[i],"|");
 				if( pixelValues.size() == 4 )
 				{
-					
+
 					chan = atol(pixelValues[0].c_str());	//first value is the channel, or pixel address
 					r = atol(pixelValues[1].c_str());	//second value is red
 					g = atol(pixelValues[2].c_str());	//third value is green
 					b = atol(pixelValues[3].c_str());	//fourth value is blue
-					
-					if(chan == 1) ofLog() << "GOT ONE!";
+
+					// if(chan == 1) ofLog() << "GOT ONE!";
 
 					// val = curvedMap(val);
-					//set the pixel values 
+					//set the pixel values
 					sm16716.set_pixel_rgb(chan, r, g, b );
 				}
 			}
@@ -102,10 +102,10 @@ void ofApp::update(){
 	}
 
 
-	ofLogVerbose() << ofGetFrameRate();
-	
+	// ofLogVerbose() << ofGetFrameRate();
+
 }
-		
+
 
 //--------------------------------------------------------------
 void ofApp::draw(){
@@ -121,4 +121,3 @@ void ofApp::keyPressed(int key){
 void ofApp::keyReleased(int key){
 
 }
-
